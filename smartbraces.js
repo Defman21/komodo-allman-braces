@@ -26,6 +26,7 @@ extensions.AllmanBraces = {};
             string = editor.getRange(pos-2, pos);
         logger.debug(string);
         if (string != ") ") return;
+        editor.delCharBefore(); // remove a space after the )
         var snippet = {
             hasAttribute: function(name) {
                 return name in this;
@@ -35,7 +36,7 @@ extensions.AllmanBraces = {};
             },
             name: "AllmanBraces snippet",
             indent_relative: "true",
-            value: "\n{\n   [[%tabstop:]]\n}"
+            value: "\n[[%soft:{]]\n   [[%tabstop:]]\n[[%soft:}]]"
         };
         // Insert auto-completion
         ko.projects.snippetInsert(snippet);
